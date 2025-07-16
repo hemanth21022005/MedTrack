@@ -9,7 +9,7 @@ app.secret_key = 'your_secret_key_here'  # Replace with a secure key in producti
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="8125125637",
+    password="",
     database="medtrack_db"
 )
 cursor = db.cursor(dictionary=True)
