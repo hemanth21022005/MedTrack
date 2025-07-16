@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login – MedTrack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind & Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-emerald-50 via-teal-100 to-cyan-100 text-slate-800 min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-md">
+    <!-- Card -->
+    <div class="bg-white/95 shadow-2xl rounded-3xl p-8 border border-teal-200 backdrop-blur-md transition hover:shadow-emerald-300">
+
+      <!-- Title -->
+      <h2 class="text-3xl font-bold mb-6 text-center text-teal-700">
+        🌿 MedTrack Login
+      </h2>
+
+      <!-- Error Message -->
+      {% if error %}
+      <div class="mb-4 p-3 text-red-700 bg-red-100 border border-red-300 rounded text-center">
+        {{ error }}
+      </div>
+      {% endif %}
+
+      <!-- Toggle Tabs -->
+      <div class="flex justify-center mb-8 space-x-3">
+        <button onclick="toggleForm('login')" id="loginTab"
+          class="px-6 py-2 rounded-full border border-teal-600 bg-teal-600 text-white font-semibold shadow hover:bg-teal-700 hover:scale-105 transition">
+          Login
+        </button>
+        <button onclick="toggleForm('register')" id="registerTab"
+          class="px-6 py-2 rounded-full border border-teal-300 bg-white text-teal-700 font-semibold hover:bg-teal-50 hover:scale-105 transition">
+          Sign Up
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" method="POST" action="/login-existing" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-600">Email</label>
+          <input type="email" name="email" required
+            class="w-full mt-1 px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
+            placeholder="you@example.com" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-600">Password</label>
+          <input type="password" name="password" required
+            class="w-full mt-1 px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
+            placeholder="••••••••" />
+        </div>
+        <button type="submit"
+          class="w-full mt-4 py-3 rounded-lg border-2 border-teal-600 bg-teal-600 text-white font-semibold hover:bg-teal-700 hover:border-teal-700 hover:scale-[1.02] transition">
+          Sign In
+        </button>
+      </form>
+
+      <!-- Registration Form -->
+      <form id="registerForm" method="POST" action="/register" class="space-y-4 hidden">
+        <div>
+          <label for="name" class="block text-sm font-medium text-slate-600">Full Name</label>
+          <input type="text" id="name" name="name" required
+            class="w-full mt-1 px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lime-400 transition"
+            placeholder="John Doe" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-slate-600">Email</label>
+          <input type="email" id="email" name="email" required
+            class="w-full mt-1 px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lime-400 transition"
+            placeholder="john@example.com" />
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-slate-600">Password</label>
+          <input type="password" id="password" name="password" required
+            class="w-full mt-1 px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lime-400 transition"
+            placeholder="Create a strong password" />
+        </div>
+        <button type="submit"
+          class="w-full mt-4 py-3 rounded-lg border-2 border-lime-500 bg-lime-500 text-white font-semibold hover:bg-lime-600 hover:border-lime-600 hover:scale-[1.02] transition">
+          Create Account
+        </button>
+      </form>
+
+      <!-- Extra Links -->
+      <div class="text-center mt-6 text-sm text-slate-500">
+        Forgot your password? <a href="#" class="text-teal-600 hover:underline">Reset here</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+
+    function toggleForm(type) {
+      if (type === 'login') {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+
+        loginTab.classList.add('bg-teal-600', 'text-white', 'border-teal-600');
+        loginTab.classList.remove('bg-white', 'text-teal-700');
+
+        registerTab.classList.add('bg-white', 'text-teal-700', 'border-teal-300');
+        registerTab.classList.remove('bg-teal-600', 'text-white', 'border-teal-600');
+      } else {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+
+        registerTab.classList.add('bg-teal-600', 'text-white', 'border-teal-600');
+        registerTab.classList.remove('bg-white', 'text-teal-700');
+
+        loginTab.classList.add('bg-white', 'text-teal-700', 'border-teal-300');
+        loginTab.classList.remove('bg-teal-600', 'text-white', 'border-teal-600');
+      }
+    }
+  </script>
+
+</body>
+</html>

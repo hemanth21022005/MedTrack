@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome to MedTrack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+  <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+
+    <!-- Left Panel: Branding + CTA -->
+    <div class="bg-indigo-600 text-white p-10 flex flex-col justify-center items-start space-y-6">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">MedTrack</h1>
+        <p class="text-lg mt-4 max-w-md text-indigo-100">
+          A smarter way to manage medications and track your health — built for convenience and care.
+        </p>
+      </div>
+      <a href="/login" class="bg-white text-indigo-600 font-bold px-6 py-3 rounded shadow hover:bg-indigo-100 transition">
+        Get Started →
+      </a>
+    </div>
+
+    <!-- Right Panel: Features -->
+    <div class="p-10 grid gap-6 content-center">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-slate-700">Why Use MedTrack?</h2>
+        <p class="text-slate-500 text-sm">Simple. Smart. Secure.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl shadow p-5 hover:shadow-md transition">
+          <div class="flex items-center gap-3 text-fuchsia-600 mb-2">
+            <i data-lucide="pill" class="w-6 h-6"></i>
+            <h3 class="font-semibold">Track Meds</h3>
+          </div>
+          <p class="text-sm text-slate-600">Never miss a dose. Stay on schedule with smart reminders.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-5 hover:shadow-md transition">
+          <div class="flex items-center gap-3 text-fuchsia-600 mb-2">
+            <i data-lucide="calendar-clock" class="w-6 h-6"></i>
+            <h3 class="font-semibold">Schedule Checkups</h3>
+          </div>
+          <p class="text-sm text-slate-600">Manage future appointments and follow-up visits.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-5 hover:shadow-md transition">
+          <div class="flex items-center gap-3 text-fuchsia-600 mb-2">
+            <i data-lucide="stethoscope" class="w-6 h-6"></i>
+            <h3 class="font-semibold">Doctor Records</h3>
+          </div>
+          <p class="text-sm text-slate-600">Keep your physician's info up to date for emergency reference.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-5 hover:shadow-md transition">
+          <div class="flex items-center gap-3 text-fuchsia-600 mb-2">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+            <h3 class="font-semibold">Privacy First</h3>
+          </div>
+          <p class="text-sm text-slate-600">Your health data is secure, encrypted, and yours alone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => lucide.createIcons();
+  </script>
+
+</body>
+</html>
