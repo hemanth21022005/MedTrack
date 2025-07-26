@@ -7,13 +7,16 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
 # AWS Setup
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')  # Adjust region
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 sns_client = boto3.client('sns', region_name='us-east-1')
 
 # DynamoDB Tables
 users_table = dynamodb.Table('Users')
 meds_table = dynamodb.Table('Medications')
 doctors_table = dynamodb.Table('Doctors')
+
+# SNS Topic ARN
+SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:YourTopicName'  # <-- Replace with actual ARN
 
 # -------------------- ROUTES --------------------
 
@@ -52,10 +55,29 @@ def register():
         flash("User already exists. Please login.", "error")
         return render_template('login.html')
 
+    # Add user to DynamoDB
     users_table.put_item(Item={'email': email, 'name': name, 'password': password})
-    
-    # Optional: Send welcome via SNS
-    # sns_client.publish(TopicArn='your_sns_topic_arn', Message=f"New registration: {email}")
+
+    # Subscribe the user's email to the SNS Topic (if not already subscribed)
+    try:
+        sns_client.subscribe(
+            TopicArn=SNS_TOPIC_ARN,
+            Protocol='email',
+            Endpoint=email
+        )
+        flash("A confirmation email has been sent to your email. Please confirm the subscription to receive notifications.", "info")
+    except Exception as e:
+        print(f"Error subscribing to SNS: {e}")
+
+    # Send a Welcome Email via SNS Topic
+    try:
+        sns_client.publish(
+            TopicArn=SNS_TOPIC_ARN,
+            Message=f"Hello {name},\n\nWelcome to MedTrack!\nYour registration was successful.",
+            Subject="Welcome to MedTrack!"
+        )
+    except Exception as e:
+        print(f"Error sending SNS message: {e}")
 
     flash("Registration successful! Please login.", "success")
     return redirect(url_for('login'))
@@ -179,4 +201,4 @@ def logout():
 # -------------------- MAIN --------------------
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
