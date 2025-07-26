@@ -16,7 +16,7 @@ meds_table = dynamodb.Table('Medications')
 doctors_table = dynamodb.Table('Doctors')
 
 # SNS Topic ARN
-SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:YourTopicName'  # <-- Replace with actual ARN
+SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:481665113061:medtrack-alerts'  # <-- Replace with actual ARN
 
 # -------------------- ROUTES --------------------
 
